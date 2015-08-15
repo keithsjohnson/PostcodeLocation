@@ -1,0 +1,5 @@
+#org.springsource.ide.eclipse.gradle.core.preferences.GradleProjectPreferences
+#Sat Aug 15 14:40:08 BST 2015
+build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;PostcodeLocationClient;PostcodeLocationDisplayer;PostcodeLocationFinder;PostcodeLocationRequestReceiver;
+org.springsource.ide.eclipse.gradle.linkedresources=
+org.springsource.ide.eclipse.gradle.rootprojectloc=

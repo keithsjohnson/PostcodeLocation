@@ -1,0 +1,2 @@
+include ":PostcodeLocationClient", ":PostcodeLocationRequestReceiver", ":PostcodeLocationFinder", ":PostcodeLocationDisplayer"
+rootProject.name = 'PostcodeLocation'
