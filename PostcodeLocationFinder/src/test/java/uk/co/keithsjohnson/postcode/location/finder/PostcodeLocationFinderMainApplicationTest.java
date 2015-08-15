@@ -9,7 +9,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringApplicationConfiguration(classes = PostcodeLocationFinderMainApplication.class)
 public class PostcodeLocationFinderMainApplicationTest {
 
+	// @Test
+	// public void contextLoads() {
+	// }
 	@Test
-	public void contextLoads() {
+	public void shouldTestMainApplication() {
+
 	}
 }
