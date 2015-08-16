@@ -5,6 +5,7 @@ import org.socialsignin.spring.data.dynamodb.core.DynamoDBOperations;
 import org.socialsignin.spring.data.dynamodb.core.DynamoDBTemplate;
 import org.socialsignin.spring.data.dynamodb.mapping.event.ValidatingDynamoDBEventListener;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +13,6 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.InstanceProfileCredentialsProvider;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -33,9 +32,12 @@ public class SpringDataDynamoDBConfigurator {
 	@Value("${amazon.region:eu-west-1}")
 	private String amazonRegion;
 
+	@Autowired
+	private AWSCredentials amazonAWSCredentials;
+
 	@Bean
 	public AmazonDynamoDB amazonDynamoDB() {
-		AmazonDynamoDB amazonDynamoDB = new AmazonDynamoDBClient(amazonAWSCredentials());
+		AmazonDynamoDB amazonDynamoDB = new AmazonDynamoDBClient(amazonAWSCredentials);
 		if (StringUtils.isNotEmpty(amazonDynamoDBEndpoint)) {
 			amazonDynamoDB.setEndpoint(amazonDynamoDBEndpoint);
 		}
@@ -46,21 +48,6 @@ public class SpringDataDynamoDBConfigurator {
 	@Bean
 	public DynamoDBOperations dynamoDBOperations() {
 		return new DynamoDBTemplate(amazonDynamoDB());
-	}
-
-	/**
-	 * The AWS Credentials are retrieved from $USER_HOME/.aws/credentials or
-	 * from Instance Profile when on AWS.
-	 * 
-	 * @return the AWS Credentials
-	 */
-	@Bean
-	public AWSCredentials amazonAWSCredentials() {
-		if (useProfileCredentials) {
-			return new ProfileCredentialsProvider().getCredentials();
-		} else {
-			return new InstanceProfileCredentialsProvider().getCredentials();
-		}
 	}
 
 	@Bean
