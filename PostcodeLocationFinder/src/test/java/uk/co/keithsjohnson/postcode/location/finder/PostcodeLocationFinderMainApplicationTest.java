@@ -11,11 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @Ignore
 public class PostcodeLocationFinderMainApplicationTest {
 
-	// @Test
-	// public void contextLoads() {
-	// }
 	@Test
-	public void shouldTestMainApplication() {
-
+	public void contextLoads() {
 	}
 }

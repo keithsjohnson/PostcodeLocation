@@ -1,4 +1,4 @@
-package uk.co.keithsjohnson.postcode.location.request.receiver.infrastructure;
+package uk.co.keithsjohnson.postcode.location.request.receiver.infrastructure.sqs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.aws.core.env.ResourceIdResolver;

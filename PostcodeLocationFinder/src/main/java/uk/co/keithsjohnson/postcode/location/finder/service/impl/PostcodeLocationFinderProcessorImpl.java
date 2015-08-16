@@ -3,8 +3,8 @@ package uk.co.keithsjohnson.postcode.location.finder.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import uk.co.keithsjohnson.postcode.location.finder.infrastructure.PostcodeLocationDisplayAuditQueueSender;
-import uk.co.keithsjohnson.postcode.location.finder.infrastructure.PostcodeLocationDisplayQueueSender;
+import uk.co.keithsjohnson.postcode.location.finder.infrastructure.sqs.PostcodeLocationDisplayAuditQueueSender;
+import uk.co.keithsjohnson.postcode.location.finder.infrastructure.sqs.PostcodeLocationDisplayQueueSender;
 import uk.co.keithsjohnson.postcode.location.finder.service.api.PostcodeLocationFinderProcessor;
 
 @Component
