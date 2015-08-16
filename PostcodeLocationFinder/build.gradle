@@ -23,22 +23,32 @@ targetCompatibility = 1.8
  
 repositories {
     mavenCentral()
+    maven {
+        url "http://repo.opensourceagility.com/release"
+    }
 }
  
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
-    //compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.data:spring-data-commons")
+	compile("org.springframework.social:spring-social-security")
+	compile("org.springframework.data:spring-data-jpa")
+	compile("org.springframework.cloud:spring-cloud-aws-autoconfigure:1.0.3.RELEASE")
     compile("org.springframework.cloud:spring-cloud-aws-messaging:1.0.2.RELEASE")
-	compile("org.springframework.cloud:spring-cloud-aws-context:1.0.2.RELEASE")
+	//compile("org.springframework.cloud:spring-cloud-aws-context:1.0.2.RELEASE")
 	compile("org.springframework.cloud:spring-cloud-starter-aws:1.0.3.RELEASE")
-	compile("org.springframework.cloud:spring-cloud-aws-messaging:1.0.2.RELEASE")
-	compile("com.amazonaws:aws-lambda-java-core:1.0.0")
-	compile("com.amazonaws:aws-lambda-java-events:1.0.0")
+	//compile("com.amazonaws:aws-lambda-java-core:1.0.0")
+	//compile("com.amazonaws:aws-lambda-java-events:1.0.0")
+	compile("com.amazonaws:aws-java-sdk-dynamodb:1.9.39")
+	compile("org.socialsignin:spring-data-dynamodb:1.0.1.RELEASE")  {
+           exclude group: 'org.springframework', module: 'spring-context' 
+           exclude group: 'org.springframework', module: 'spring-aop' 
+           exclude group: 'org.springframework', module: 'spring-tx' }
+	
 	
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
- 
  
 eclipse {
     classpath {

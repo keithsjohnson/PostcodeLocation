@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.co.keithsjohnson.postcode.location.request.receiver.infrastructure.sqs.PostcodeLocationFinderQueueSender;
 
 @RestController
-public class ReceivePostcodeForDisplay {
+public class ReceivePostcodeForDisplayAction {
 
 	@Autowired
 	private PostcodeLocationFinderQueueSender postcodeLocationFinderQueueSender;
