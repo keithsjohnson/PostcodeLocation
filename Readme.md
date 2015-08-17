@@ -13,7 +13,7 @@ The project uses Gradle for building the application.
 There are 4 subprojects:
 1. Postcode Location Client (9000)
    a. Display Web Page to send Postcode Location Display (ToDo 2)
-   b. Display Map of Postcode Locations Received on Websocket (ToDo 1)
+   b. Display Map of Postcode Locations Received on Websocket
    c. Upload postcodes.csv to S3 with subscription to SQS PostcodeLocationFileQueue (ToDo)
    d. Receive messages from PostcodeLocationFileQueue (ToDo)
    e. Send Postcode Location Display requests (ToDo)
@@ -34,7 +34,7 @@ There are 4 subprojects:
 
 4. Postcode Location Displayer (9003)
    a. Receives messages from PostcodeLocationDisplayQueue (ToDo 1)
-   b. Send Postcode Location to Websocket Map for display (ToDo 1)
+   b. Send Postcode Location to Websocket Map for display
    
 Postcode Test Data URL
 ----------------------
@@ -55,4 +55,10 @@ http://localhost:9001/postcode?postcode=SK1 3LF
 http://localhost:9001/postcode?postcode=SK4 2HD
 http://localhost:9001/postcode?postcode=ST5 4EP
 http://localhost:9001/postcode?postcode=ST7 2YB
+
+PostcodeLocationDisplayer
+-------------------------
+http://localhost:9000/map.html
+http://localhost:9000/displaypostcode?postcode=ST7%202YB&latitude=52.987161&longitude=-2.294545
+
 
