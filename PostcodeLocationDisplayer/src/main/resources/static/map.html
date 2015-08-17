@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Address WebSocket Map</title>
+    <script src="sockjs-0.3.4.js"></script>
+    <script src="stomp.js"></script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script type="text/javascript">
+        var stompClient = null;
+        
+        function setConnected(connected) {
+            document.getElementById('connect').disabled = connected;
+            document.getElementById('disconnect').disabled = !connected;
+            document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
+            document.getElementById('response').innerHTML = '';
+            document.getElementById('map-canvas').style.visibility = connected ? 'visible' : 'hidden';
+        }
+        
+        function connect() {
+            var socket = new SockJS('/displaypostcodeWS');
+            stompClient = Stomp.over(socket);            
+            stompClient.connect({}, function(frame) {
+                setConnected(true);
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/postcodemap', function(postcodeLocation){
+                	console.log('subscribe: ' + postcodeLocation);
+                	var jsonPostcodeLocation = JSON.parse(postcodeLocation.body)
+                    showAddress(jsonPostcodeLocation);
+                });
+            });
+            initialize();
+        }
+        
+        function disconnect() {
+            stompClient.disconnect();
+            setConnected(false);
+            console.log("Disconnected");
+        }
+        
+        function showAddress(jsonAddress) {
+            console.log('showAddress: ' + jsonAddress.postcode);
+            var response = document.getElementById('response');
+            var p = document.createElement('p');
+            p.style.wordWrap = 'break-word';
+            p.appendChild(document.createTextNode(jsonAddress.postcode + " " + jsonAddress.latitude + " " + jsonAddress.longitude));
+            response.appendChild(p);
+            addAddressMarker(jsonAddress);
+        }
+
+        var map
+        function initialize() {
+
+            var myOptions = {
+                         center: new google.maps.LatLng(54, -2),
+                         zoom: 6,
+                         mapTypeId: google.maps.MapTypeId.ROADMAP
+                         };
+
+            map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+            
+        }
+        
+        function addAddressMarker(jsonAddress) {
+        	var langLat = new google.maps.LatLng(jsonAddress.latitude, jsonAddress.longitude, true);
+            var marker = new google.maps.Marker({map: map, position: langLat, title: jsonAddress.postcode});
+        }
+        //google.maps.event.addDomListener(window, 'load', initialize)
+     </script>
+</head>
+<body>
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+<div>
+    <div>
+        <button id="connect" onclick="connect();">Connect</button>
+        <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
+    </div>
+</div>
+    <div id="map-canvas"></div>
+    <div id="conversationDiv">
+        <p id="response"></p>
+    </div>
+</body>
+</html>
