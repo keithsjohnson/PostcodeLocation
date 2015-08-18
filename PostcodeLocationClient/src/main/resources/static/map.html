@@ -26,7 +26,7 @@
         }
         
         function connect() {
-            var socket = new SockJS('/displaypostcodeWS');
+            var socket = new SockJS('/displayPostcodeLocationOnMapWebsocket');
             stompClient = Stomp.over(socket);            
             stompClient.connect({}, function(frame) {
                 setConnected(true);
