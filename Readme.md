@@ -50,6 +50,8 @@ Postcode Location URLs
 ----------------------
 PostcodeLocationFinder (Also Stores using the URLs)
 ----------------------
+JVM Arguments: -Duse.profile.credentials=true -Dserver.port=9002
+
 http://localhost:9002
 http://localhost:9002/save?postcode=SK1%203LF&latitude=53.402139&longitude=-2.152291&population=0&households=0
 http://localhost:9002/save?postcode=SK4%202HD&latitude=53.407577&longitude=-2.177943&population=0&households=0
@@ -62,6 +64,8 @@ http://postcodelocationfinder.elasticbeanstalk.com/save?postcode=LS2%209JT&latit
 
 PostcodeLocationRequestReceiver
 -------------------------------
+JVM Arguments: -Duse.profile.credentials=true -Dserver.port=9000
+
 http://localhost:9001
 http://localhost:9001/postcode?postcode=SK1%203LF
 http://localhost:9001/postcode?postcode=SK4%202HD
@@ -76,6 +80,8 @@ http://postcodelocationrequest.elasticbeanstalk.com/postcode?postcode=LS2%209JT
 
 PostcodeLocationClient
 ----------------------
+JVM Arguments: -Duse.profile.credentials=true -Dserver.port=9000
+
 http://localhost:9000
 http://localhost:9000/map.html
 http://localhost:9000/displaypostcode?postcode=ST7%202YB&latitude=53.096855&longitude=-2.294545
@@ -93,3 +99,16 @@ The project uses Gradle for building the application.
 gradle build buildDockerZip --daemon --parallel
 
 https://docs.gradle.org/current/userguide/multi_project_builds.html
+
+AWS Secret Key (for running locally)
+------------------------------------
+%UserProfile%\.aws\credentials
+
+
+-Duse.profile.credentials=true -Dserver.port=9001
+-Duse.profile.credentials=true -Dserver.port=9002
+
+
+AWS Role (for running on AWS)
+-----------------------------
+Create Role with SQS and DynamoDB access
