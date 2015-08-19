@@ -17,13 +17,15 @@ There are 4 subprojects:
    d. Upload postcodes.csv to S3 with subscription to SQS PostcodeLocationFileQueue (ToDo)
    e. Receive messages from PostcodeLocationFileQueue
    f. Send Postcode Location Display requests to Map
-   g. Package application in jar and Dockerfile for running on AWS (ToDo)
+   g. Package application in jar and Dockerfile for running on AWS
+   h. Deploy Docker zip to AWS using terraform (ToDo 1)
 
 2. Postcode Location Request Receiver (9001)
    a. Receives REST Postcode Requests 
    b. Sends Postcode to SQS PostcodeLocationFinderQueue
    c. Stores Requests in DynamoDB Table PostcodeLocationRequests  (ToDo 3) 
-   d. Package application in jar and Dockerfile for running on AWS (ToDo 2)
+   d. Package application in jar and Dockerfile for running on AWS
+   e. Deploy Docker zip to AWS using terraform (ToDo 1)
 
 3. Postcode Location Finder (9002)
    a. Receives messages from PostcodeLocationFinderQueue
@@ -33,7 +35,8 @@ There are 4 subprojects:
    e. Store Postcode on DynamoDB PostcodeLocationDisplayAudit table (ToDo 3)
    f. Receives REST Postcode Location Details save Requests
    g. Stores Postcode Location Details in DynamoDB Table PostcodeLocationDetails 
-   h. Package application in jar and Dockerfile for running on AWS (ToDo 1)
+   h. Package application in jar and Dockerfile for running on AWS
+   i. Deploy Docker zip to AWS using terraform  (ToDo 1)
 
 4. Postcode Location Displayer (9003) NO LONGER NEEDED BUT KEEP FOR NOW
    a. Receives messages from PostcodeLocationDisplayQueue (NO LONGER NEEDED BUT KEEP FOR NOW)
@@ -69,6 +72,7 @@ http://postcodelocationrequest.elasticbeanstalk.com/postcode?postcode=SK1%203LF
 http://postcodelocationrequest.elasticbeanstalk.com/postcode?postcode=SK4%202HD
 http://postcodelocationrequest.elasticbeanstalk.com/postcode?postcode=ST5%204EP
 http://postcodelocationrequest.elasticbeanstalk.com/postcode?postcode=ST7%202YB
+http://postcodelocationrequest.elasticbeanstalk.com/postcode?postcode=LS2%209JT
 
 PostcodeLocationClient
 ----------------------
