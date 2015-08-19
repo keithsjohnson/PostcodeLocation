@@ -45,27 +45,42 @@ http://www.doogal.co.uk/PostcodeDownloads.php
 
 Postcode Location URLs
 ----------------------
-Save Postcode Location Details Data
------------------------------------
+PostcodeLocationFinder (Also Stores using the URLs)
+----------------------
 http://localhost:9002
 http://localhost:9002/save?postcode=SK1%203LF&latitude=53.402139&longitude=-2.152291&population=0&households=0
 http://localhost:9002/save?postcode=SK4%202HD&latitude=53.407577&longitude=-2.177943&population=0&households=0
 http://localhost:9002/save?postcode=ST5%204EP&latitude=52.987161&longitude=-2.233692&population=180&households=65
 http://localhost:9002/save?postcode=ST7%202YB&latitude=53.096855&longitude=-2.294545&population=35&households=22
+http://localhost:9002/save?postcode=LS2%209JT&latitude=53.807899&longitude=-1.553664&population=0&households=0
 
-Display Postcode Location
--------------------------
+http://postcodelocationfinder.elasticbeanstalk.com/
+http://postcodelocationfinder.elasticbeanstalk.com/save?postcode=LS2%209JT&latitude=53.807899&longitude=-1.553664&population=0&households=0
+
+PostcodeLocationRequestReceiver
+-------------------------------
 http://localhost:9001
 http://localhost:9001/postcode?postcode=SK1%203LF
 http://localhost:9001/postcode?postcode=SK4%202HD
 http://localhost:9001/postcode?postcode=ST5%204EP
 http://localhost:9001/postcode?postcode=ST7%202YB
 
+http://postcodelocationrequest.elasticbeanstalk.com/postcode?postcode=SK1%203LF
+http://postcodelocationrequest.elasticbeanstalk.com/postcode?postcode=SK4%202HD
+http://postcodelocationrequest.elasticbeanstalk.com/postcode?postcode=ST5%204EP
+http://postcodelocationrequest.elasticbeanstalk.com/postcode?postcode=ST7%202YB
+
 PostcodeLocationClient
 ----------------------
 http://localhost:9000
 http://localhost:9000/map.html
 http://localhost:9000/displaypostcode?postcode=ST7%202YB&latitude=53.096855&longitude=-2.294545
+http://localhost:9000/displaypostcode?postcode=LS2%209JT&latitude=53.807899&longitude=-1.553664
+
+http://postcodelocationclient.elasticbeanstalk.com/
+http://postcodelocationclient.elasticbeanstalk.com/map.html
+http://postcodelocationclient.elasticbeanstalk.com/displaypostcode?postcode=ST7%202YB&latitude=53.096855&longitude=-2.294545
+http://postcodelocationclient.elasticbeanstalk.com/displaypostcode?postcode=LS2%209JT&latitude=53.807899&longitude=-1.553664
 
 Build Details
 -------------
