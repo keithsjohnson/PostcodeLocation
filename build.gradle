@@ -20,6 +20,23 @@ subprojects {
     repositories {
         mavenCentral()
     }
+
+	task copyTask(type: Copy) {
+    	from 'build/libs'
+    	from 'src/main/docker'
+    	include '*.jar'
+    	include 'Dockerfile'
+    	include 'Dockerrun.aws.json'
+    	into 'build/docker'
+	}
+
+    task buildDockerZip(type: Zip, dependsOn:copyTask) {
+  	    from 'build/docker'
+        include '*.jar'
+        include 'Dockerfile'
+        include 'Dockerrun.aws.json'
+  	    archiveName baseName + 'Docker.zip'
+    }
 }
 
 project(':PostcodeLocationClient') {
