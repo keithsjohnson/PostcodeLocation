@@ -40,7 +40,9 @@
         
         function setConnected(connected) {
             document.getElementById('connect').disabled = connected;
+            document.getElementById('connect').style.visibility = !connected ? 'visible' : 'hidden';
             document.getElementById('disconnect').disabled = !connected;
+            document.getElementById('disconnect').style.visibility = connected ? 'visible' : 'hidden';
             document.getElementById('postcodeLocationsDiv').style.visibility = connected ? 'visible' : 'hidden';
             document.getElementById('postcodeLocationResponse').innerHTML = '';
             document.getElementById('postcodeLocationMapCanvas').style.visibility = connected ? 'visible' : 'hidden';
