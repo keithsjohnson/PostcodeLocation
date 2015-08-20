@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Display Address WebSocket Map</title>
+    <title>Show Postcode Location on Map (Received from WebSocket)</title>
     <script src="sockjs-0.3.4.js"></script>
     <script src="stomp.js"></script>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
-      html, body, #map-canvas {
+      html, body, #postcodeLocationMapCanvas {
         height: 100%;
         margin: 0px;
         padding: 0px
@@ -17,47 +17,51 @@
     <script type="text/javascript">
         var stompClient = null;
         
-        function setConnected(connected) {
-            document.getElementById('connect').disabled = connected;
-            document.getElementById('disconnect').disabled = !connected;
-            document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
-            document.getElementById('response').innerHTML = '';
-            document.getElementById('map-canvas').style.visibility = connected ? 'visible' : 'hidden';
-        }
-        
-        function connect() {
+        function connectToPostcodeLocationWebSocket() {
             var socket = new SockJS('/displayPostcodeLocationOnMapWebsocket');
             stompClient = Stomp.over(socket);            
             stompClient.connect({}, function(frame) {
                 setConnected(true);
-                console.log('Connected: ' + frame);
+                console.log('Connected To Postcode Location WebSocket: ' + frame);
                 stompClient.subscribe('/topic/postcodemap', function(postcodeLocation){
-                	console.log('subscribe: ' + postcodeLocation);
+                	// console.log('subscribe: ' + postcodeLocation);
                 	var jsonPostcodeLocation = JSON.parse(postcodeLocation.body)
-                    showAddress(jsonPostcodeLocation);
+                    showPostcodeLocation(jsonPostcodeLocation);
                 });
             });
-            initialize();
+            initializePostcodeLocation();
         }
         
-        function disconnect() {
+        function disconnectFromPostcodeLocationWebSocket() {
             stompClient.disconnect();
             setConnected(false);
-            console.log("Disconnected");
+            console.log("Disconnected From Postcode Location WebSocket");
         }
         
-        function showAddress(jsonAddress) {
-            console.log('showAddress: ' + jsonAddress.postcode);
-            var response = document.getElementById('response');
+        function setConnected(connected) {
+            document.getElementById('connect').disabled = connected;
+            document.getElementById('disconnect').disabled = !connected;
+            document.getElementById('postcodeLocationsDiv').style.visibility = connected ? 'visible' : 'hidden';
+            document.getElementById('postcodeLocationResponse').innerHTML = '';
+            document.getElementById('postcodeLocationMapCanvas').style.visibility = connected ? 'visible' : 'hidden';
+        }
+        
+        function showPostcodeLocation(jsonPostcodeLocation) {
+            addPostcodeLocationMarkerToMap(jsonPostcodeLocation);
+            appendPostcodeLocationToResponse(jsonPostcodeLocation);
+        }
+        
+        function appendPostcodeLocationToResponse(jsonPostcodeLocation) {
+            // console.log('showPostcodeLocation: ' + jsonPostcodeLocation.postcode);
+            var postcodeLocationResponse = document.getElementById('postcodeLocationResponse');
             var p = document.createElement('p');
             p.style.wordWrap = 'break-word';
-            p.appendChild(document.createTextNode(jsonAddress.postcode + " " + jsonAddress.latitude + " " + jsonAddress.longitude));
-            response.appendChild(p);
-            addAddressMarker(jsonAddress);
-        }
+            p.appendChild(document.createTextNode(jsonPostcodeLocation.postcode + " " + jsonPostcodeLocation.latitude + " " + jsonPostcodeLocation.longitude));
+            postcodeLocationResponse.appendChild(p);
+        } 
 
-        var map
-        function initialize() {
+        var postcodeLocationMap
+        function initializePostcodeLocation() {
 
             var myOptions = {
                          center: new google.maps.LatLng(54, -2),
@@ -65,29 +69,28 @@
                          mapTypeId: google.maps.MapTypeId.ROADMAP
                          };
 
-            map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+            postcodeLocationMap = new google.maps.Map(document.getElementById("postcodeLocationMapCanvas"), myOptions);
             
         }
-        
-        function addAddressMarker(jsonAddress) {
-        	var langLat = new google.maps.LatLng(jsonAddress.latitude, jsonAddress.longitude, true);
-            var marker = new google.maps.Marker({map: map, position: langLat, title: jsonAddress.postcode});
+
+        function addPostcodeLocationMarkerToMap(jsonPostcodeLocation) {
+        	var latitudeLongitude = new google.maps.LatLng(jsonPostcodeLocation.latitude, jsonPostcodeLocation.longitude, true);
+            var marker = new google.maps.Marker({map: postcodeLocationMap, position: latitudeLongitude, title: jsonPostcodeLocation.postcode});
         }
-        //google.maps.event.addDomListener(window, 'load', initialize)
      </script>
 </head>
-<body>
+<body onload="connectToPostcodeLocationWebSocket()">
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable
     Javascript and reload this page!</h2></noscript>
 <div>
     <div>
-        <button id="connect" onclick="connect();">Connect</button>
-        <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
+        <button id="connect" onclick="connectToPostcodeLocationWebSocket();">Connect To Postcode Location WebSocket</button>
+        <button id="disconnect" disabled="disabled" onclick="disconnectFromPostcodeLocationWebSocket();">Disconnect From Postcode Location WebSocket</button>
     </div>
 </div>
-    <div id="map-canvas"></div>
-    <div id="conversationDiv">
-        <p id="response"></p>
+    <div id="postcodeLocationMapCanvas"></div>
+    <div id="postcodeLocationsDiv">
+        <p id="postcodeLocationResponse"></p>
     </div>
 </body>
 </html>
