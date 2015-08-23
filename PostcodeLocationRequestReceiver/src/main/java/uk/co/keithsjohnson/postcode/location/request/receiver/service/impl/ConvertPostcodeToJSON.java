@@ -1,5 +1,7 @@
 package uk.co.keithsjohnson.postcode.location.request.receiver.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,5 +30,13 @@ public class ConvertPostcodeToJSON {
 		}
 
 		return postcodesString;
+	}
+
+	public String convert(List<Postcode> postcodes) {
+
+		Postcode[] postcodesArray = postcodes.toArray(new Postcode[postcodes.size()]);
+
+		return convert(postcodesArray);
+
 	}
 }
