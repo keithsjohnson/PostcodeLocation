@@ -124,6 +124,8 @@ http://localhost:9000
 
 http://localhost:9000/map.html
 
+http://localhost:9000/upload?key=postcodes.csv&filename=E:/dev/git/PostcodeLocation/PostcodeLocationClient/testData/postcodes.csv
+
 http://localhost:9000/displaypostcode?postcode=ST7%202YB&latitude=53.096855&longitude=-2.294545
 
 http://localhost:9000/displaypostcode?postcode=LS2%209JT&latitude=53.807899&longitude=-1.553664
