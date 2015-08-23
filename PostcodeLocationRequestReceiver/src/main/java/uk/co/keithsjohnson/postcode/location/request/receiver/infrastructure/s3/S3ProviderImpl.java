@@ -16,7 +16,6 @@ public class S3ProviderImpl {
 	@Autowired
 	private S3FileChunkProcessorImpl s3FileChunkProcessorImpl;
 
-	@Override
 	public void retrieve(String message) {
 		System.out.println("S3 RETRIEVE: " + message);
 
