@@ -162,3 +162,6 @@ PostcodeLocationFinderQueue
 PostcodeLocationDisplayAuditQueue
 PostcodeLocationFileQueue
 
+eb cli
+-------
+eb 
