@@ -27,6 +27,8 @@ subprojects {
     	include '*.jar'
     	include 'Dockerfile'
     	include 'Dockerrun.aws.json'
+    	include '.ebignore'
+    	include 'eb-create-and-deploy-*.cmd'
     	into 'build/docker'
 	}
 
@@ -37,6 +39,7 @@ subprojects {
         include 'Dockerrun.aws.json'
   	    archiveName baseName + 'Docker.zip'
     }
+    
 }
 
 project(':PostcodeLocationClient') {

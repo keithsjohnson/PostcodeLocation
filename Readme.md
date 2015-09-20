@@ -26,7 +26,7 @@ There are 4 subprojects:
    
    g. Package application in jar and Dockerfile for running on AWS
    
-   h. Deploy Docker zip to AWS using terraform (ToDo 1)
+   h. Deploy Docker zip to AWS using eb CLI
 
 2. Postcode Location Request Receiver (9001)
 
@@ -38,7 +38,7 @@ There are 4 subprojects:
    
    d. Package application in jar and Dockerfile for running on AWS
    
-   e. Deploy Docker zip to AWS using terraform (ToDo 1)
+   e. Deploy Docker zip to AWS using eb CLI
 
 3. Postcode Location Finder (9002)
 
@@ -58,7 +58,7 @@ There are 4 subprojects:
    
    h. Package application in jar and Dockerfile for running on AWS
    
-   i. Deploy Docker zip to AWS using terraform  (ToDo 1)
+   i. Deploy Docker zip to AWS using eb CLI
 
 4. Postcode Location Displayer (9003) NO LONGER NEEDED BUT KEEP FOR NOW
 
