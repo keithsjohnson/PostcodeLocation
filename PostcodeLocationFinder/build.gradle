@@ -3,8 +3,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
-        classpath("io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE")
+        classpath("io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE")
     }
 }
  
@@ -35,9 +35,9 @@ dependencies {
 	compile("org.springframework.data:spring-data-commons")
 	compile("org.springframework.social:spring-social-security")
 	compile("org.springframework.data:spring-data-jpa")
-	compile("org.springframework.cloud:spring-cloud-aws-autoconfigure:1.0.2.RELEASE")
-    compile("org.springframework.cloud:spring-cloud-aws-messaging:1.0.2.RELEASE")
-	//compile("org.springframework.cloud:spring-cloud-aws-context:1.0.2.RELEASE")
+	compile("org.springframework.cloud:spring-cloud-aws-autoconfigure:1.0.3.RELEASE")
+    compile("org.springframework.cloud:spring-cloud-aws-messaging:1.0.3.RELEASE")
+	//compile("org.springframework.cloud:spring-cloud-aws-context:1.0.3.RELEASE")
 	compile("org.springframework.cloud:spring-cloud-starter-aws:1.0.3.RELEASE")
 	//compile("com.amazonaws:aws-lambda-java-core:1.0.0")
 	//compile("com.amazonaws:aws-lambda-java-events:1.0.0")
